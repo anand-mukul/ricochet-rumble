@@ -24,4 +24,26 @@ function aboutAnimination() {
   });
 }
 
+function rulesVideo() {
+  var rulesCenter = document.querySelector("#rules-video-center");
+  var video = document.querySelector("#rules video");
+  rulesCenter.addEventListener("click", function () {
+    video.play();
+    gsap.to(video, {
+      transform: "scaleX(1) scaleY(1)",
+      opacity: 1,
+      borderRadius: 0,
+    });
+  });
+  video.addEventListener("click", function () {
+    video.pause();
+    gsap.to(video, {
+      transform: "scaleX(0.7) scaleY(0)",
+      opacity: 0,
+      borderRadius: "30px",
+    });
+  });
+}
+
 aboutAnimination();
+rulesVideo();
