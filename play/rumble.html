@@ -1,79 +1,25 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <title>Rumble</title>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta
-    name="description"
-    content="Welcome to Rumble - a place for exciting challenges and competitions. Learn more about us, our rules, and how to get in touch."
-  />
-  <meta
-    name="keywords"
-    content="Ricochet, Ricochet Rumble, Rumble, challenges, competitions, games, rules, contact"
-  />
-  <meta name="author" content="Mukul Anand" />
-  <link rel="shortcut icon" href="assests/favicon.ico" type="image/x-icon" />
-  <link rel="icon" href="assests/favicon.ico" type="image/x-icon" />
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <div id="rumble-main">
-    <div class="rumble-section" id="left">
-      <div class="rumble-box">
-        <div class="board-section" id="board-up">
-          <div class="player-info">
-            <div class="player-image" id="player1-image"></div>
-            <div class="player-details" id="player1-info">
-              <div class="player-name" id="player1-name"></div>
-              <div class="player-pieces" id="player1-pieces"></div>
-            </div>
-          </div>
-        </div>
-        <div class="board-section" id="board">
-          <!-- Chessboard will be generated dynamically here -->
-        </div>
-        <div class="board-section" id="board-down">
-          <div class="player-info">
-            <div class="player-image" id="player2-image"></div>
-            <div class="player-details" id="player2-info">
-              <div class="player-name" id="player2-name"></div>
-              <div class="player-pieces" id="player2-pieces"></div>
-            </div>
-          </div>
-        </div>
+  <head>
+    <title>Rumble</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Welcome to Rumble - a place for exciting challenges and competitions. Learn more about us, our rules, and how to get in touch." />
+    <meta name="keywords" content="Ricochet, Ricochet Rumble, Rumble, challenges, competitions, games, rules, contact" />
+    <meta name="author" content="Mukul Anand" />
+    <link rel="shortcut icon" href="assests/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="assests/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="left-container">
+        <div id="gameboard"></div>
+      </div>
+      <div class="right-container">
+        <div id="game-details"></div>
       </div>
     </div>
-    <div class="rumble-section" id="right">
-      <div class="rumble-box">
-        <div class="game-info" id="player-turn"></div>
-        <div class="game-info" id="timer">
-          <div class="player-timer" id="player1-timer"></div>
-          <div class="player-timer" id="player2-timer"></div>
-        </div>
-        <div class="game-info" id="game-history"></div>
-        <div class="game-controls" id="game-control">
-          <div class="action-buttons" id="action-button">
-            <div class="action" id="new-game"></div>
-            <div class="action" id="move-back"></div>
-            <div class="action" id="move-forward"></div>
-            <div class="action" id="show-hint"></div>
-          </div>
-          <div class="action-options" id="action-options">
-            <div class="action" id="share"></div>
-            <div class="action" id="download"></div>
-            <div class="action" id="settings"></div>
-            <div class="action" id="resign"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script src="rumble.js"></script>
-  <script src="withFriend.js"></script>
-  <script src="withBot.js"></script>
-  <script src="pieces.js"></script>
-  <script src="engine.js"></script>
-</body>
+    <script type="module" src="rumble.js"></script>
+  </body>
 </html>
