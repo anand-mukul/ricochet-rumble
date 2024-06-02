@@ -1,25 +1,98 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <title>Rumble - Play</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Welcome to Rumble - a place for exciting challenges and competitions. Learn more about us, our rules, and how to get in touch." />
-    <meta name="keywords" content="Ricochet, Ricochet Rumble, Rumble, challenges, competitions, games, rules, contact" />
-    <meta name="author" content="Mukul Anand" />
-    <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon" />
-    <link rel="icon" href="/assets/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <div class="container">
-      <div class="left-container">
-        <div id="gameboard"></div>
+   <head>
+      <title>Rumble - Play</title>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta name="description" content="Welcome to Rumble - a place for exciting challenges and competitions. Learn more about us, our rules, and how to get in touch." />
+      <meta name="keywords" content="Ricochet, Ricochet Rumble, Rumble, challenges, competitions, games, rules, contact" />
+      <meta name="author" content="Mukul Anand" />
+      <meta property="og:title" content="Rumble - Play" />
+      <meta property="og:description" content="Welcome to Rumble - a place for exciting challenges and competitions." />
+      <meta property="og:image" content="/assets/favicon.ico" />
+      <meta property="og:url" content="https://ricochet-rumble.vercel.app" />
+      <meta name="theme-color" content="#ffffff" />
+      <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon" />
+      <link rel="icon" href="/assets/favicon.ico" type="image/x-icon" />
+      <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+      <link rel="stylesheet" href="style.css" />
+   </head>
+   <body>
+      <div id="rumble-main">
+         <div id="popup-box">
+          <div class="popup-content-box">
+            <div class="popup-content">
+               <div id="popup-title"></div>
+               <div class="popup-hr"><hr/></div>
+               <div id="popup-subtitle"></div>
+               <div class="popup-buttons">
+               <button id="play-again-button" class="popup-button">Play Again</button>
+               <button id="quit-button" class="popup-button">Quit</button>
+               <button class="popup-button" id="replayButton">Replay</button>
+              </div>
+            </div>
+          </div>
+         </div>
+         <div id="left">
+            <div id="gameboard" role="application">
+               <!-- Rumbleboard will be generated dynamically here -->
+            </div>
+         </div>
+         <div id="right">
+            <div class="rumble-box">
+               <div id="display-player-turn" aria-live="polite">Player turn:&nbsp;<span id="player-turn">blue</span></div>
+               <div id="timer">
+                  <div class="player-timer">Blue Time: <span id="blue-timer-display">05:00</span></div>
+                  <div class="player-timer">Red Time: <span id="red-timer-display">05:00</span></div>
+               </div>
+               <div class="game-controls">
+                  <div class="action-buttons" id="action-buttons">
+                     <h2>Controls</h2>
+                     <button class="action" id="newgameButton" aria-label="New Game">New Game</button>
+                     <button class="action" id="leftButton" aria-label="Left">Rotate Left</button>
+                     <button class="action" id="rightButton" aria-label="Right">Rotate Right</button>
+                     <button class="action" id="undoButton" aria-label="Undo">Undo</button>
+                     <button class="action" id="redoButton" aria-label="Redo">Redo</button>
+                     <button class="action" id="resignButton" aria-label="Resign">Resign</button>
+                  </div>
+                  <div id="moveHistoryContainer">
+                     <h2>Move History</h2>
+                     <div class="game-info" id="game-history"></div>
+                  </div>
+               </div>
+               <div class="action-options" id="action-options">
+                  <div class="tooltip">
+                     <button class="action" id="toggleButton" aria-label="Pause"><i class="ri-pause-line"></i></button>
+                     <div class="tooltiptext" id="tooltipText">Pause</div>
+                  </div>
+                  <div class="tooltip">
+                     <button class="action" id="soundtoggleButton" aria-label="Mute"><i class="ri-volume-mute-line"></i></button>
+                     <div class="tooltiptext" id="soundTooltipText">Mute</div>
+                  </div>
+                  <div class="tooltip">
+                     <button class="action" id="resetButton" aria-label="Reset"><i class="ri-refresh-line"></i></button>
+                     <div class="tooltiptext">Reset</div>
+                  </div>
+                  <div class="tooltip">
+                     <button class="action" id="swapButton" aria-label="Swap"><i class="ri-swap-2-line"></i></button>
+                     <div class="tooltiptext">Swap</div>
+                  </div>
+                  <div class="tooltip">
+                     <button class="action" id="castspellButton" aria-label="Cast Spell"><i class="ri-sparkling-2-line"></i></button>
+                     <div class="tooltiptext">Cast Spell</div>
+                  </div>
+               </div>
+            </div>
+         </div>
       </div>
-      <div class="right-container">
-        <div id="game-details"></div>
-      </div>
-    </div>
-    <script type="module" src="rumble.js"></script>
-  </body>
+      <audio id="sound-move" src="/assets/audio/move-sound.mp3"></audio>
+      <audio id="sound-bullet" src="/assets/audio/fire-sound.mp3"></audio>
+      <audio id="sound-titan-hit" src="/assets/audio/explosion.mp3"></audio>
+      <audio id="sound-game-over" src="/assets/audio/over.mp3"></audio>
+      <audio id="sound-game-start" src="/assets/audio/start.mp3"></audio>
+      <audio id="background-music" src="/assets/audio/background.mp3" loop></audio>
+      <script src="/play/rumble.js"></script>
+      <script src="/play/js/pieces.js"></script>
+      <script src="/play/js/randomBoard.js"></script>
+   </body>
 </html>
