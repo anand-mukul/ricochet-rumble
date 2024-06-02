@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Rumble - Invalid</title>
-    <meta charset="UTF-8" />
+    <title>Rumble - Invalid</title><meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Welcome to Rumble - a place for exciting challenges and competitions. Learn more about us, our rules, and how to get in touch." />
     <meta name="keywords" content="Ricochet, Ricochet Rumble, Rumble, challenges, competitions, games, rules, contact" />
     <meta name="author" content="Mukul Anand" />
+    <meta property="og:title" content="Rumble - Invalid" />
+    <meta property="og:description" content="Welcome to Rumble - a place for exciting challenges and competitions." />
+    <meta property="og:image" content="/assets/favicon.ico" />
+    <meta property="og:url" content="https://ricochet-rumble.vercel.app" />
+    <meta name="theme-color" content="#ffffff" />
     <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon" />
     <link rel="icon" href="/assets/favicon.ico" type="image/x-icon" />
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
+            background-color: #1a1a1d;
             margin: 0;
             padding: 0;
             display: flex;
@@ -24,43 +28,49 @@
         .container {
             text-align: center;
             padding: 20px;
+            border: #10ff00 1px solid;
             border-radius: 10px;
-            background-color: #fff;
+            background: linear-gradient(to right, transparent, #1a1a1d), url(https://grainy-gradients.vercel.app/noise.svg);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         h1 {
-            color: #333;
+            font-size: 32px;
+            font-weight: 600;
+            color: #10ff00;
+            margin-bottom: 10px;
         }
 
         p {
-            color: #666;
+            font-size: 18px;
+            color: #8cff32;
             margin-bottom: 20px;
         }
 
         .button {
             display: inline-block;
-            padding: 10px 20px;
-            border-radius: 5px;
-            background-color: #4CAF50;
-            color: white;
-            text-align: center;
-            text-decoration: none;
-            font-size: 16px;
+            margin-top: 16px;
+            background-color: #8cff32;
+            color: #1a1a1d;
+            border: 1px dashed #f8ff00;
+            border-radius: 15px;
             cursor: pointer;
+            padding: 0.7em 1.5em;
             transition: background-color 0.3s;
+            font-size: 16px;
+            font-weight: 600;
         }
 
         .button:hover {
-            background-color: #45a049;
+            background-color: #d4ff32;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Oops! Invalid Mode</h1>
-        <p>The mode parameter in the URL is invalid or missing.</p>
-        <p>Please go back and try again with a valid mode.</p>
+        <h1>Oops! Invalid Page</h1>
+        <p>The URL is invalid or missing.</p>
+        <p>Please go back and try again with a valid url.</p>
         <a href="/" class="button">Go Back</a>
     </div>
 </body>
