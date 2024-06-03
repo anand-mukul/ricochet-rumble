@@ -385,3 +385,163 @@ body {
 .popup-button:hover {
   background-color: #d4ff32;
 }
+
+/* Media Queries for Responsiveness */
+@media (max-width: 992px) {
+  #rumble-main {
+    flex-direction: column;
+  }
+
+  #left, #right {
+    width: 100%;
+    border-right: none;
+  }
+
+  /* Reorder elements for mobile */
+  #right {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #display-player-turn {
+    order: 1;
+    margin-bottom: 10px;
+  }
+
+  #timer {
+    order: 2; 
+    margin-bottom: 20px;
+  }
+
+  #gameboard {
+    order: 3; 
+    margin-bottom: 20px;
+  }
+
+  .game-controls {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .action-buttons {
+    order: 5;
+    width: 100%;
+    margin-bottom: 20px;
+    height: auto;
+  }
+
+  #moveHistoryContainer {
+    order: 6; 
+    width: 100%;
+    height: auto;
+  }
+
+  .action-options {
+    order: 4;  
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+
+  .action-options .tooltip {
+    margin: 10px 5px;
+  }
+
+  #gameboard {
+    grid-template-columns: repeat(8, 11vw);
+    grid-template-rows: repeat(8, 11vw);
+    max-width: 90vw;
+  }
+
+  .square {
+    width: 11vw;
+    height: 11vw;
+    border-radius: 4px;
+  }
+
+  .piece {
+    width: 10vw;
+    height: 10vw;
+  }
+
+  .piece svg {
+    width: 9vw;
+    height: 9vw;
+  }
+
+  #display-player-turn {
+    font-size: 5vw;
+  }
+
+  .player-timer {
+    font-size: 4vw;
+  }
+
+  .action-buttons h2, #moveHistoryContainer h2 {
+    font-size: 4.5vw;
+  }
+
+  .action-buttons button {
+    font-size: 3.5vw;
+    padding: 0.8em 1.2em;
+    margin-bottom: 10px;
+  }
+
+  .action-options button {
+    font-size: 0; 
+    padding: 1em;
+  }
+
+  .action-options button i {
+    font-size: 6vw; 
+  }
+
+  .tooltiptext {
+    font-size: 3vw;
+  }
+}
+
+/* Further adjustments for smaller screens */
+@media (max-width: 576px) {
+  #gameboard {
+    margin-top: 15.9px;
+    grid-template-columns: repeat(8, 10vw);
+    grid-template-rows: repeat(8, 10vw);
+  }
+
+  .square {
+    width: 10vw;
+    height: 10vw;
+  }
+
+  .piece {
+    width: 9vw;
+    height: 9vw;
+  }
+
+  .piece svg {
+    width: 8vw;
+    height: 8vw;
+  }
+
+  #display-player-turn {
+    font-size: 5.1vw;
+  }
+
+  .player-timer {
+    font-size: 4.3vw;
+  }
+
+  .action-buttons h2, #moveHistoryContainer h2 {
+    font-size: 4.5vw;
+  }
+
+  .action-buttons button {
+    font-size: 4vw;
+  }
+
+  .action-options button i {
+    font-size: 7vw;
+  }
+}
