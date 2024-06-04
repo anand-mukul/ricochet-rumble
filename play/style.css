@@ -44,7 +44,6 @@ body {
     0 5px 10px -3px transparent;
 }
 
-
 .square {
   position: relative;
   width: 85px;
@@ -436,15 +435,26 @@ body {
   margin-bottom: 10px;
 }
 
-.popup-hr hr {
-  border: none;
-  border-top: 1px outset #d4ff32;
-  margin: 10px 0;
+.popup-content hr {
+  border-top: 1px solid #d4ff32;
+  width: 100%;
+  margin-top: 2px;
+  margin-bottom: 18px;
 }
 
 #popup-subtitle {
   font-size: 24px;
   color: #8cff32;
+  margin-bottom: 20px;
+}
+
+.popup-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  margin-top: 20px;
   margin-bottom: 20px;
 }
 
@@ -608,8 +618,20 @@ body {
     font-size: 5.1vw;
   }
 
+  #player-turn{
+    padding: 2px;
+    border-radius: 50%;
+    background-color: #d4ff32;
+  }
+
   .player-timer {
     font-size: 4.3vw;
+  }
+
+  #blue-timer-display, #red-timer-display {
+    padding: 2px;
+    border-radius: 50%;
+    background-color: #10ff00;
   }
 
   .action-buttons h2, #moveHistoryContainer h2 {
@@ -622,5 +644,19 @@ body {
 
   .action-options button i {
     font-size: 7vw;
+  }
+  .popup-content-box {
+    width: 100%;
+  }
+  #popup-subtitle {
+    margin-bottom: 8px;
+  }
+  .popup-buttons {
+    margin-top: 0;
+    margin-bottom: 2px;
+  }
+  .popup-button {
+    padding: 0.5em 1em;
+    font-size: 14px;
   }
 }
