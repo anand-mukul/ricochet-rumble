@@ -39,7 +39,11 @@ body {
   grid-template-columns: repeat(8, 85px);
   grid-template-rows: repeat(8, 85px);
   gap: 2px;
+  box-shadow: 
+    0 -5px 10px -3px transparent,
+    0 5px 10px -3px transparent;
 }
+
 
 .square {
   position: relative;

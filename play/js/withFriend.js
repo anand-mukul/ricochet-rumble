@@ -254,6 +254,7 @@ function switchPlayer() {
   currentPlayer = currentPlayer === "blue" ? "red" : "blue";
   playerTurn.textContent = `${currentPlayer}`;
   playerTurn.style.color = currentPlayer;
+  updateShadowColor();
 }
 
 function movePiece(fromSquareId, toSquareId) {
@@ -1240,11 +1241,28 @@ function updateSoundButton() {
   }
 }
 
+function updateShadowColor() {
+  const gameboard = document.querySelector('#gameboard');
+  
+  if (currentPlayer === 'blue') {
+    gameboard.style.boxShadow = `
+      0 -5px 10px -3px transparent,
+      0 5px 10px -3px blue         
+    `;
+  } else if (currentPlayer === 'red') {
+    gameboard.style.boxShadow = `
+      0 -5px 10px -3px red,          
+      0 5px 10px -3px transparent  
+    `;
+  }
+}
+
 window.addEventListener("load", () => {
-	localStorage.removeItem("moveHistory");
+  localStorage.removeItem("moveHistory");
 	localStorage.removeItem("gameOverInfo");
 	initialBoardState = initializeBoard();
 	createBoard(initialBoardState);
+  updateShadowColor()
 	startTimer();
 	moveHistory = [];
   });
