@@ -1049,6 +1049,7 @@ function newGame() {
   currentPlayer = "blue";
   playerTurn.textContent = `${currentPlayer}`;
   playerTurn.style.color = currentPlayer;
+  updateShadowColor();
   moveHistory = [];
   currentMoveIndex = -1;
   isGamePaused = false;
