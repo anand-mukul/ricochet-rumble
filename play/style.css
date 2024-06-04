@@ -106,8 +106,6 @@ body {
 
 .bullet {
   position: absolute;
-  width: 85px;
-  height: 85px;
   transition: all 0.1s ease; 
   z-index: 1;
 }
@@ -474,7 +472,6 @@ body {
     border-right: none;
   }
 
-  /* Reorder elements for mobile */
   #right {
     padding: 20px;
     display: flex;
