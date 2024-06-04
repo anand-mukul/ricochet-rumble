@@ -42,6 +42,7 @@ body {
 }
 
 .square {
+  position: relative;
   width: 85px;
   height: 85px;
   background-color: #fffff0;
@@ -101,6 +102,82 @@ body {
   align-items: center;
   width: 85px;
   height: 85px;
+}
+
+.bullet {
+  position: absolute;
+  width: 85px;
+  height: 85px;
+  transition: all 0.1s ease; 
+  z-index: 1;
+}
+
+.from-top {
+  animation: from-top 0.1s forwards;
+}
+
+@keyframes from-top {
+  from {
+    top: -2%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  to {
+    top: 98%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.from-bottom {
+  animation: from-bottom 0.1s forwards;
+}
+
+@keyframes from-bottom {
+  from {
+    top: 98%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  to {
+    top: -2%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.from-left {
+  animation: from-left 0.1s forwards;
+}
+
+@keyframes from-left {
+  from {
+    left: -2%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  to {
+    left: 98%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.from-right {
+  animation: from-right 0.1s forwards;
+}
+
+@keyframes from-right {
+  from {
+    left: 98%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  to {
+    left: -2%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
 }
 
 /* RIGHT PART */

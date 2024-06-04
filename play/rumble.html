@@ -66,7 +66,7 @@
                      <div class="tooltiptext" id="tooltipText">Pause</div>
                   </div>
                   <div class="tooltip">
-                     <button class="action" id="soundtoggleButton" aria-label="Mute"><i class="ri-volume-mute-line"></i></button>
+                     <button class="action" id="soundtoggleButton" aria-label="Mute"><i class="ri-volume-up-line"></i></button>
                      <div class="tooltiptext" id="soundTooltipText">Mute</div>
                   </div>
                   <div class="tooltip">
@@ -85,12 +85,12 @@
             </div>
          </div>
       </div>
-      <audio id="sound-move" src="/assets/audio/move-sound.mp3"></audio>
-      <audio id="sound-bullet" src="/assets/audio/fire-sound.mp3"></audio>
-      <audio id="sound-titan-hit" src="/assets/audio/explosion.mp3"></audio>
-      <audio id="sound-game-over" src="/assets/audio/over.mp3"></audio>
-      <audio id="sound-game-start" src="/assets/audio/start.mp3"></audio>
-      <audio id="background-music" src="/assets/audio/background.mp3" loop></audio>
+      <audio id="sound-move" src="/assets/audio/move-sound.mp3" preload="auto"></audio>
+      <audio id="sound-bullet" src="/assets/audio/fire-sound.mp3" preload="auto"></audio>
+      <audio id="sound-titan-hit" src="/assets/audio/explosion.mp3" preload="auto"></audio>
+      <audio id="sound-game-over" src="/assets/audio/over.mp3" preload="auto"></audio>
+      <audio id="sound-game-start" src="/assets/audio/start.mp3" preload="auto"></audio>
+      <!-- <audio id="background-music" src="/assets/audio/background.mp3" loop></audio> -->
       <script src="/play/rumble.js"></script>
       <script src="/play/js/pieces.js"></script>
       <script src="/play/js/randomBoard.js"></script>
