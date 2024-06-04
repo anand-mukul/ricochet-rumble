@@ -634,6 +634,9 @@ summary::marker {
   #info-up {
     margin-top: 0;
   }
+  #info-up p {
+    margin-bottom: 30px;
+  }
   #preview {
     flex-direction: column;
     height: 100px;

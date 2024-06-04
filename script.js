@@ -5,10 +5,6 @@ hamburgerMenu.addEventListener("click", function () {
   navBottom.classList.toggle("active");
 });
 
-hamburgerMenu.addEventListener("touchstart", function () {
-  navBottom.classList.toggle("active");
-});
-
 function aboutAnimination() {
   var aboutRightListAll = document.querySelectorAll(".about-right-list");
   aboutRightListAll.forEach(function (hover) {
@@ -63,9 +59,7 @@ function rulesVideo() {
   }
 
   rulesCenter.addEventListener("click", playVideo);
-  rulesCenter.addEventListener("touchstart", playVideo);
   video.addEventListener("click", pauseVideo);
-  video.addEventListener("touchstart", pauseVideo);
 }
 
 aboutAnimination();
