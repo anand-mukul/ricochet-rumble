@@ -68,15 +68,23 @@ nav h1 a {
   background-color: #fff;
   padding: 1em;
   position: absolute;
-  top: 47px;
+  top: 42px;
   width: 107%;
   left: -15px;
   backdrop-filter: blur(8px);
   background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 15px;
+  transition: all 0.3s ease;
 }
 
 #nav-bottom.active {
   display: block;
+  animation: slideDown 0.3s forwards;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 #nav-bottom h4 {
@@ -100,6 +108,17 @@ nav h1 a {
 #nav-bottom h4 a:hover {
   background-color: rgba(255, 255, 255, 0.2);
   cursor: pointer;
+}
+
+/* Mobile view */
+@media (max-width: 768px) {
+  .hamburger-menu {
+    display: block;
+  }
+
+  .nav-right {
+    display: none;
+  }
 }
 
 #home {

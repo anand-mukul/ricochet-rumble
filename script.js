@@ -1,8 +1,15 @@
 const hamburgerMenu = document.querySelector(".hamburger-menu");
 const navBottom = document.getElementById("nav-bottom");
+const navLinks = navBottom.querySelectorAll("h4 a");
 
 hamburgerMenu.addEventListener("click", function () {
   navBottom.classList.toggle("active");
+});
+
+navLinks.forEach(link => {
+  link.addEventListener("click", function () {
+    navBottom.classList.remove("active");
+  });
 });
 
 function aboutAnimination() {
