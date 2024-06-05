@@ -114,7 +114,7 @@ body {
 }
 
 .from-top {
-  animation: from-top 0.1s forwards;
+  animation: from-top 0.1s linear;
 }
 
 @keyframes from-top {
@@ -131,7 +131,7 @@ body {
 }
 
 .from-bottom {
-  animation: from-bottom 0.1s forwards;
+  animation: from-bottom 0.1s linear;
 }
 
 @keyframes from-bottom {
@@ -148,7 +148,7 @@ body {
 }
 
 .from-left {
-  animation: from-left 0.1s forwards;
+  animation: from-left 0.1s linear;
 }
 
 @keyframes from-left {
@@ -165,7 +165,7 @@ body {
 }
 
 .from-right {
-  animation: from-right 0.1s forwards;
+  animation: from-right 0.1s linear;
 }
 
 @keyframes from-right {

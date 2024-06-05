@@ -70,19 +70,19 @@ let selectedSquareId;
 let replayMovesOver = false;
 
 function createBoard(boardConfig) {
-	const gameBoard = document.querySelector("#gameboard");
-	gameBoard.innerHTML = "";
-	boardConfig.forEach((startPiece, i) => {
-	  const square = document.createElement("div");
-	  square.classList.add("square");
-	  square.setAttribute("square-id", i);
-	  square.innerHTML = startPiece;
-	  gameBoard.append(square);
-	});
-	document.querySelectorAll(".piece").forEach((piece) => {
-	  piece.addEventListener("click", handlePieceClick);
-	});
-  }
+  const gameBoard = document.querySelector("#gameboard");
+  gameBoard.innerHTML = "";
+  boardConfig.forEach((startPiece, i) => {
+    const square = document.createElement("div");
+    square.classList.add("square");
+    square.setAttribute("square-id", i);
+    square.innerHTML = startPiece;
+    gameBoard.append(square);
+  });
+  document.querySelectorAll(".piece").forEach((piece) => {
+    piece.addEventListener("click", handlePieceClick);
+  });
+}
 
 function handlePieceClick(event) {
   const piece = event.target.closest(".piece");
@@ -133,25 +133,15 @@ function handlePieceClick(event) {
 }
 
 function rotatePiece(degrees) {
-  const pieceId =
-    degrees === -90
-      ? leftButton.getAttribute("data-piece-id")
-      : rightButton.getAttribute("data-piece-id");
-  const squareId =
-    degrees === -90
-      ? parseInt(leftButton.getAttribute("data-square-id"))
-      : parseInt(rightButton.getAttribute("data-square-id"));
+  const pieceId = degrees === -90 ? leftButton.getAttribute("data-piece-id") : rightButton.getAttribute("data-piece-id");
+  const squareId = degrees === -90 ? parseInt(leftButton.getAttribute("data-square-id")) : parseInt(rightButton.getAttribute("data-square-id"));
   if (isGamePaused || bulletMoving) {
     return;
   }
   if (pieceId === "ricochet" || pieceId === "semiricochet") {
-    const piece = document.querySelector(
-      `.square[square-id='${squareId}'] .piece`,
-    );
+    const piece = document.querySelector(`.square[square-id='${squareId}'] .piece`);
     if (piece && piece.classList.contains(currentPlayer)) {
-      const currentRotation = parseInt(
-        piece.getAttribute("data-rotation") || "0",
-      );
+      const currentRotation = parseInt(piece.getAttribute("data-rotation") || "0");
       const newRotation = (currentRotation + degrees + 360) % 360;
       piece.style.transform = `rotate(${newRotation}deg)`;
       piece.setAttribute("data-rotation", newRotation);
@@ -229,26 +219,26 @@ function handleSwapClick(event) {
 }
 
 function swapPieces(fromSquareId, toSquareId) {
-	if (isGamePaused || bulletMoving) {
-	  return;
-	}
-	const fromSquare = document.querySelector(`.square[square-id='${fromSquareId}']`);
-	const toSquare = document.querySelector(`.square[square-id='${toSquareId}']`);
-	const tempPiece = toSquare.innerHTML;
-	toSquare.innerHTML = fromSquare.innerHTML;
-	fromSquare.innerHTML = tempPiece;
-  
-	const swappedPieces = [fromSquare.firstChild, toSquare.firstChild];
-	swappedPieces.forEach(piece => {
-	  if (piece) {
-		piece.addEventListener("click", handlePieceClick);
-	  }
-	});
-  
-	saveMoveHistory(fromSquareId, toSquareId, 0, "swap");
-	switchPlayer();
-	shootBulletForCurrentPlayer();
+  if (isGamePaused || bulletMoving) {
+    return;
   }
+  const fromSquare = document.querySelector(`.square[square-id='${fromSquareId}']`);
+  const toSquare = document.querySelector(`.square[square-id='${toSquareId}']`);
+  const tempPiece = toSquare.innerHTML;
+  toSquare.innerHTML = fromSquare.innerHTML;
+  fromSquare.innerHTML = tempPiece;
+
+  const swappedPieces = [fromSquare.firstChild, toSquare.firstChild];
+  swappedPieces.forEach((piece) => {
+    if (piece) {
+      piece.addEventListener("click", handlePieceClick);
+    }
+  });
+
+  saveMoveHistory(fromSquareId, toSquareId, 0, "swap");
+  switchPlayer();
+  shootBulletForCurrentPlayer();
+}
 
 function switchPlayer() {
   currentPlayer = currentPlayer === "blue" ? "red" : "blue";
@@ -259,9 +249,7 @@ function switchPlayer() {
 
 function movePiece(fromSquareId, toSquareId) {
   playSound(soundMove);
-  const fromSquare = document.querySelector(
-    `.square[square-id='${fromSquareId}']`,
-  );
+  const fromSquare = document.querySelector(`.square[square-id='${fromSquareId}']`);
   const toSquare = document.querySelector(`.square[square-id='${toSquareId}']`);
   const piece = fromSquare.firstChild;
 
@@ -274,7 +262,7 @@ function movePiece(fromSquareId, toSquareId) {
       toSquare.appendChild(piece);
       fromSquare.innerHTML = "";
 
-	  const movedPiece = toSquare.firstChild;
+      const movedPiece = toSquare.firstChild;
       movedPiece.addEventListener("click", handlePieceClick);
 
       saveMoveHistory(fromSquareId, toSquareId);
@@ -287,7 +275,7 @@ function movePiece(fromSquareId, toSquareId) {
       toSquare.appendChild(piece);
       fromSquare.innerHTML = "";
 
-	  const movedPiece = toSquare.firstChild;
+      const movedPiece = toSquare.firstChild;
       movedPiece.addEventListener("click", handlePieceClick);
 
       saveMoveHistory(fromSquareId, toSquareId);
@@ -299,9 +287,7 @@ function movePiece(fromSquareId, toSquareId) {
 
 function shootBullet(squareId, direction, player) {
   playSound(soundBullet);
-  const targetSquare = document.querySelector(
-    `.square[square-id='${squareId}']`,
-  );
+  const targetSquare = document.querySelector(`.square[square-id='${squareId}']`);
   const bulletDiv = document.createElement("div");
   bulletDiv.classList.add("bullet");
   bulletDiv.classList.add(`${player}`);
@@ -314,20 +300,13 @@ function shootBullet(squareId, direction, player) {
 }
 
 function moveBullet(squareId, direction, player) {
-  const currentSquare = document.querySelector(
-    `.square[square-id='${squareId}']`,
-  );
+  const currentSquare = document.querySelector(`.square[square-id='${squareId}']`);
   const bulletDiv = currentSquare.querySelector(".bullet");
   if (bulletDiv) {
     bulletDiv.remove();
     let nextSquareId;
 
-    bulletDiv.classList.remove(
-      "from-top",
-      "from-bottom",
-      "from-left",
-      "from-right",
-    );
+    bulletDiv.classList.remove("from-top", "from-bottom", "from-left", "from-right");
     switch (direction) {
       case "top":
         nextSquareId = squareId - 8;
@@ -349,25 +328,11 @@ function moveBullet(squareId, direction, player) {
         nextSquareId = squareId;
     }
 
-    if (
-      nextSquareId >= 0 &&
-      nextSquareId < 64 &&
-      !isEdgeOfBoard(squareId, direction)
-    ) {
-      const nextSquare = document.querySelector(
-        `.square[square-id='${nextSquareId}']`,
-      );
+    if (nextSquareId >= 0 && nextSquareId < 64 && !isEdgeOfBoard(squareId, direction)) {
+      const nextSquare = document.querySelector(`.square[square-id='${nextSquareId}']`);
       if (nextSquare) {
-        if (
-          nextSquare.firstChild &&
-          nextSquare.firstChild.classList.contains("piece")
-        ) {
-          handleBulletCollision(
-            nextSquare,
-            nextSquare.firstChild,
-            bulletDiv,
-            player,
-          );
+        if (nextSquare.firstChild && nextSquare.firstChild.classList.contains("piece")) {
+          handleBulletCollision(nextSquare, nextSquare.firstChild, bulletDiv, player);
           return;
         } else {
           nextSquare.appendChild(bulletDiv);
@@ -467,31 +432,19 @@ function deflectBullet(piece, position, bulletDiv, player) {
     },
   };
 
-  const bulletDirectionClass = Array.from(bulletDiv.classList).find((c) =>
-    c.startsWith("from-"),
-  );
+  const bulletDirectionClass = Array.from(bulletDiv.classList).find((c) => c.startsWith("from-"));
   newBulletDirection = deflectionMap[pieceId][rotation][bulletDirectionClass];
   if (newBulletDirection === null) {
-	destroyPiece(position, bulletDiv, player);
+    destroyPiece(position, bulletDiv, player);
     bulletMoving = false;
     return;
   }
 
   if (newBulletDirection) {
-    bulletDiv.classList.remove(
-      "from-top",
-      "from-bottom",
-      "from-left",
-      "from-right",
-    );
+    bulletDiv.classList.remove("from-top", "from-bottom", "from-left", "from-right");
     const newSquareId = getNextSquareId(position, newBulletDirection);
-    if (
-      isValidBulletSquare(newSquareId) &&
-      !isEdgeOfBoard(position, newBulletDirection)
-    ) {
-      const newSquare = document.querySelector(
-        `.square[square-id='${newSquareId}']`,
-      );
+    if (isValidBulletSquare(newSquareId) && !isEdgeOfBoard(position, newBulletDirection)) {
+      const newSquare = document.querySelector(`.square[square-id='${newSquareId}']`);
       const newTargetPiece = newSquare.firstChild;
 
       if (newTargetPiece) {
@@ -513,15 +466,15 @@ function deflectBullet(piece, position, bulletDiv, player) {
 }
 
 function destroyPiece(squareId, bulletDiv, player) {
-	const square = document.querySelector(`.square[square-id='${squareId}']`);
-	const destroyedPieceHTML = square.innerHTML;
-	const destroyedPiece = square.firstChild;
-	const destroyedPieceClone = destroyedPiece.cloneNode(true);
-	square.innerHTML = "";
-	bulletDiv.remove();
-	saveMoveHistory(null, squareId, 0, "destroy", destroyedPieceHTML);
-	bulletMoving = false;
-  }
+  const square = document.querySelector(`.square[square-id='${squareId}']`);
+  const destroyedPieceHTML = square.innerHTML;
+  const destroyedPiece = square.firstChild;
+  const destroyedPieceClone = destroyedPiece.cloneNode(true);
+  square.innerHTML = "";
+  bulletDiv.remove();
+  saveMoveHistory(null, squareId, 0, "destroy", destroyedPieceHTML);
+  bulletMoving = false;
+}
 
 function isEdgeOfBoard(squareId, direction) {
   switch (direction) {
@@ -554,11 +507,7 @@ function findCanonSquare() {
 
   squares.forEach((square) => {
     const piece = square.firstChild;
-    if (
-      piece &&
-      piece.id === "canon" &&
-      piece.classList.contains(newCanonPlayer)
-    ) {
+    if (piece && piece.id === "canon" && piece.classList.contains(newCanonPlayer)) {
       movePlayerCanonId = parseInt(square.getAttribute("square-id"));
     }
   });
@@ -573,12 +522,7 @@ function handleBulletCollision(square, piece, bulletDiv, player) {
   } else if (pieceId === "titan") {
     checkForEnemyPiece(square, piece, bulletDiv, player);
   } else if (pieceId === "ricochet" || pieceId === "semiricochet") {
-    deflectBullet(
-      piece,
-      parseInt(square.getAttribute("square-id")),
-      bulletDiv,
-      player,
-    );
+    deflectBullet(piece, parseInt(square.getAttribute("square-id")), bulletDiv, player);
   } else {
     bulletDiv.remove();
     bulletMoving = false;
@@ -594,12 +538,7 @@ function checkForEnemyPiece(square, piece, bulletDiv, player) {
       bulletDiv.remove();
       bulletMoving = false;
     } else {
-      deflectBullet(
-        piece,
-        parseInt(square.getAttribute("square-id")),
-        bulletDiv,
-        player,
-      );
+      deflectBullet(piece, parseInt(square.getAttribute("square-id")), bulletDiv, player);
     }
   } else if (pieceId === "titan") {
     if (!(playerPiece === playerBullet)) {
@@ -613,12 +552,7 @@ function checkForEnemyPiece(square, piece, bulletDiv, player) {
         displayResult(`${currentPlayer === "blue" ? "red" : "blue"} wins!`);
       }, 500);
     } else {
-      deflectBullet(
-        piece,
-        parseInt(square.getAttribute("square-id")),
-        bulletDiv,
-        player,
-      );
+      deflectBullet(piece, parseInt(square.getAttribute("square-id")), bulletDiv, player);
     }
   }
 }
@@ -677,9 +611,7 @@ function squareIdToChessNotation(squareId) {
 
 function highlightMove(move) {
   clearHighlight();
-  const fromSquare = document.querySelector(
-    `.square[square-id='${move.from}']`,
-  );
+  const fromSquare = document.querySelector(`.square[square-id='${move.from}']`);
   const toSquare = document.querySelector(`.square[square-id='${move.to}']`);
   if (fromSquare) fromSquare.classList.add("highlight-move");
   if (toSquare) toSquare.classList.add("highlight-move");
@@ -691,20 +623,14 @@ function clearHighlight() {
   });
 }
 
-function saveMoveHistory(
-  fromSquareId,
-  toSquareId,
-  rotation = 0,
-  moveType = "move",
-  destroyedPiece = null
-) {
+function saveMoveHistory(fromSquareId, toSquareId, rotation = 0, moveType = "move", destroyedPiece = null) {
   const move = {
     from: fromSquareId,
     to: toSquareId,
     rotation,
     type: moveType,
     player: currentPlayer,
-	destroyedPiece,
+    destroyedPiece,
   };
   if (currentMoveIndex < moveHistory.length - 1) {
     moveHistory = moveHistory.slice(0, currentMoveIndex + 1);
@@ -718,18 +644,14 @@ function saveMoveHistory(
 function undoMove() {
   if (currentMoveIndex >= 0) {
     const lastMove = moveHistory[currentMoveIndex];
-	if (lastMove.type === "destroy") {
-		toSquare = document.querySelector(`.square[square-id='${lastMove.to}']`);
+    if (lastMove.type === "destroy") {
+      toSquare = document.querySelector(`.square[square-id='${lastMove.to}']`);
       toSquare.innerHTML = lastMove.destroyedPiece;
       piece = toSquare.firstChild;
       piece.addEventListener("click", handlePieceClick);
-	  } else if (lastMove.type === "swap") {
-      const fromSquare = document.querySelector(
-        `.square[square-id='${lastMove.to}']`,
-      );
-      const toSquare = document.querySelector(
-        `.square[square-id='${lastMove.from}']`,
-      );
+    } else if (lastMove.type === "swap") {
+      const fromSquare = document.querySelector(`.square[square-id='${lastMove.to}']`);
+      const toSquare = document.querySelector(`.square[square-id='${lastMove.from}']`);
       const fromPiece = fromSquare.firstChild;
       const toPiece = toSquare.firstChild;
 
@@ -740,12 +662,8 @@ function undoMove() {
         fromSquare.appendChild(toPiece);
       }
     } else {
-      const fromSquare = document.querySelector(
-        `.square[square-id='${lastMove.to}']`,
-      );
-      const toSquare = document.querySelector(
-        `.square[square-id='${lastMove.from}']`,
-      );
+      const fromSquare = document.querySelector(`.square[square-id='${lastMove.to}']`);
+      const toSquare = document.querySelector(`.square[square-id='${lastMove.from}']`);
       const piece = fromSquare.firstChild;
 
       if (lastMove.rotation !== 0) {
@@ -756,9 +674,7 @@ function undoMove() {
         fromSquare.innerHTML = "";
       }
       if (lastMove.rotation !== 0) {
-        const currentRotation = parseInt(
-          piece.getAttribute("data-rotation") || "0",
-        );
+        const currentRotation = parseInt(piece.getAttribute("data-rotation") || "0");
         const newRotation = (currentRotation - lastMove.rotation + 360) % 360;
         piece.style.transform = `rotate(${newRotation}deg)`;
         piece.setAttribute("data-rotation", newRotation);
@@ -777,15 +693,11 @@ function redoMove() {
     const nextMove = moveHistory[currentMoveIndex];
 
     if (nextMove.type === "destroy") {
-		toSquare = document.querySelector(`.square[square-id='${nextMove.to}']`);
+      toSquare = document.querySelector(`.square[square-id='${nextMove.to}']`);
       toSquare.innerHTML = "";
-	  } else if (nextMove.type === "swap") {
-      const fromSquare = document.querySelector(
-        `.square[square-id='${nextMove.from}']`,
-      );
-      const toSquare = document.querySelector(
-        `.square[square-id='${nextMove.to}']`,
-      );
+    } else if (nextMove.type === "swap") {
+      const fromSquare = document.querySelector(`.square[square-id='${nextMove.from}']`);
+      const toSquare = document.querySelector(`.square[square-id='${nextMove.to}']`);
       const fromPiece = fromSquare.firstChild;
       const toPiece = toSquare.firstChild;
 
@@ -796,12 +708,8 @@ function redoMove() {
         fromSquare.appendChild(toPiece);
       }
     } else {
-      const fromSquare = document.querySelector(
-        `.square[square-id='${nextMove.from}']`,
-      );
-      const toSquare = document.querySelector(
-        `.square[square-id='${nextMove.to}']`,
-      );
+      const fromSquare = document.querySelector(`.square[square-id='${nextMove.from}']`);
+      const toSquare = document.querySelector(`.square[square-id='${nextMove.to}']`);
       const piece = fromSquare.firstChild;
 
       if (nextMove.rotation !== 0) {
@@ -812,9 +720,7 @@ function redoMove() {
         fromSquare.innerHTML = "";
       }
       if (nextMove.rotation !== 0) {
-        const currentRotation = parseInt(
-          piece.getAttribute("data-rotation") || "0",
-        );
+        const currentRotation = parseInt(piece.getAttribute("data-rotation") || "0");
         const newRotation = (currentRotation + nextMove.rotation + 360) % 360;
         piece.style.transform = `rotate(${newRotation}deg)`;
         piece.setAttribute("data-rotation", newRotation);
@@ -827,16 +733,12 @@ function redoMove() {
 }
 
 function updateBoardFromHistory() {
-	createBoard(initialBoardState);
+  createBoard(initialBoardState);
   for (let i = 0; i <= currentMoveIndex; i++) {
     const move = moveHistory[i];
     if (move.type === "swap") {
-      const fromSquare = document.querySelector(
-        `.square[square-id='${move.from}']`,
-      );
-      const toSquare = document.querySelector(
-        `.square[square-id='${move.to}']`,
-      );
+      const fromSquare = document.querySelector(`.square[square-id='${move.from}']`);
+      const toSquare = document.querySelector(`.square[square-id='${move.to}']`);
       const fromPiece = fromSquare.firstChild;
       const toPiece = toSquare.firstChild;
 
@@ -847,12 +749,8 @@ function updateBoardFromHistory() {
         fromSquare.appendChild(toPiece);
       }
     } else {
-      const fromSquare = document.querySelector(
-        `.square[square-id='${move.from}']`,
-      );
-      const toSquare = document.querySelector(
-        `.square[square-id='${move.to}']`,
-      );
+      const fromSquare = document.querySelector(`.square[square-id='${move.from}']`);
+      const toSquare = document.querySelector(`.square[square-id='${move.to}']`);
       const piece = fromSquare.firstChild;
 
       if (move.rotation !== 0) {
@@ -863,9 +761,7 @@ function updateBoardFromHistory() {
         fromSquare.innerHTML = "";
       }
       if (move.rotation !== 0) {
-        const currentRotation = parseInt(
-          piece.getAttribute("data-rotation") || "0",
-        );
+        const currentRotation = parseInt(piece.getAttribute("data-rotation") || "0");
         const newRotation = (currentRotation + move.rotation + 360) % 360;
         piece.style.transform = `rotate(${newRotation}deg)`;
         piece.setAttribute("data-rotation", newRotation);
@@ -876,70 +772,61 @@ function updateBoardFromHistory() {
 }
 
 function replayGame() {
-	hidePopup();
-	isGamePaused = true;
-	currentMoveIndex = -1;
-	createBoard(initialBoardState);
-	let moveIndex = 0;
-  
-	function playNextMove() {
-	  if (moveIndex < moveHistory.length) {
-		const move = moveHistory[moveIndex];
-		const fromSquare = document.querySelector(
-		  `.square[square-id='${move.from}']`,
-		);
-		const toSquare = document.querySelector(
-		  `.square[square-id='${move.to}']`,
-		);
-  
-		if (move.type === "destroy") {
-		  toSquare.innerHTML = "";
-		} else if (move.type === "swap") {
-		  const fromPiece = fromSquare.firstChild;
-		  const toPiece = toSquare.firstChild;
-  
-		  if (fromPiece) {
-			toSquare.appendChild(fromPiece);
-		  }
-		  if (toPiece) {
-			fromSquare.appendChild(toPiece);
-		  }
-		} else {
-		  const piece = fromSquare ? fromSquare.firstChild : null;
-		  if (move.rotation !== 0) {
-			toSquare.appendChild(piece);
-			fromSquare.appendChild(piece);
-		  } else if (piece) {
-			toSquare.appendChild(piece);
-			fromSquare.innerHTML = "";
-		  }
-		  if (move.rotation !== 0) {
-			const currentRotation = parseInt(
-			  piece.getAttribute("data-rotation") || "0",
-			);
-			const newRotation = (currentRotation + move.rotation + 360) % 360;
-			piece.style.transform = `rotate(${newRotation}deg)`;
-			piece.setAttribute("data-rotation", newRotation);
-		  }
-		}
-  
-		switchPlayer();
-		moveIndex++;
-		setTimeout(playNextMove, 500);
-	  } else {
-		isGamePaused = false;
-		replayMovesOver = true;
-		replayOver();
-	  }
-	}
-	playNextMove();
+  hidePopup();
+  isGamePaused = true;
+  currentMoveIndex = -1;
+  createBoard(initialBoardState);
+  let moveIndex = 0;
+
+  function playNextMove() {
+    if (moveIndex < moveHistory.length) {
+      const move = moveHistory[moveIndex];
+      const fromSquare = document.querySelector(`.square[square-id='${move.from}']`);
+      const toSquare = document.querySelector(`.square[square-id='${move.to}']`);
+
+      if (move.type === "destroy") {
+        toSquare.innerHTML = "";
+      } else if (move.type === "swap") {
+        const fromPiece = fromSquare.firstChild;
+        const toPiece = toSquare.firstChild;
+
+        if (fromPiece) {
+          toSquare.appendChild(fromPiece);
+        }
+        if (toPiece) {
+          fromSquare.appendChild(toPiece);
+        }
+      } else {
+        const piece = fromSquare ? fromSquare.firstChild : null;
+        if (move.rotation !== 0) {
+          toSquare.appendChild(piece);
+          fromSquare.appendChild(piece);
+        } else if (piece) {
+          toSquare.appendChild(piece);
+          fromSquare.innerHTML = "";
+        }
+        if (move.rotation !== 0) {
+          const currentRotation = parseInt(piece.getAttribute("data-rotation") || "0");
+          const newRotation = (currentRotation + move.rotation + 360) % 360;
+          piece.style.transform = `rotate(${newRotation}deg)`;
+          piece.setAttribute("data-rotation", newRotation);
+        }
+      }
+
+      switchPlayer();
+      moveIndex++;
+      setTimeout(playNextMove, 500);
+    } else {
+      isGamePaused = false;
+      replayMovesOver = true;
+      replayOver();
+    }
   }
+  playNextMove();
+}
 
 function resignGame() {
-  checkGameOver(
-    "Game Over",
-    `Player ${currentPlayer} resigns. Player ${currentPlayer === "blue" ? "red" : "blue"} wins!`,
-  );
+  checkGameOver("Game Over", `Player ${currentPlayer} resigns. Player ${currentPlayer === "blue" ? "red" : "blue"} wins!`);
 }
 
 function getPossibleMoves(pieceId, squareId) {
@@ -967,9 +854,7 @@ function getPossibleMoves(pieceId, squareId) {
     return moves;
   } else {
     return moves.filter((move) => {
-      const targetSquare = document.querySelector(
-        `.square[square-id='${move}']`,
-      );
+      const targetSquare = document.querySelector(`.square[square-id='${move}']`);
       return targetSquare && targetSquare.innerHTML === "";
     });
   }
@@ -977,14 +862,8 @@ function getPossibleMoves(pieceId, squareId) {
 
 function addAdjacentMoves(moves, row, col) {
   const directions = [
-    [1, 0],
-    [-1, 0],
-    [0, 1],
-    [0, -1],
-    [1, 1],
-    [1, -1],
-    [-1, 1],
-    [-1, -1],
+    [1, 0],  [-1, 0],  [0, 1],  [0, -1],
+    [1, 1],  [1, -1],  [-1, 1], [-1, -1],
   ];
   directions.forEach((direction) => {
     const newRow = row + direction[0];
@@ -1064,6 +943,8 @@ function newGame() {
     blue: 300,
     red: 300,
   };
+  updateTimerDisplay();
+  startTimer();
   displayMoveHistory();
   localStorage.removeItem("moveHistory");
   localStorage.removeItem("gameOverInfo");
@@ -1125,9 +1006,7 @@ function highlightSpellPossibleMoves(pieceId, squareId) {
   possibleMoves.forEach((move) => {
     const targetSquare = document.querySelector(`.square[square-id='${move}']`);
     if (targetSquare) {
-      const targetPiece = targetSquare.firstChild
-        ? targetSquare.firstChild.id
-        : null;
+      const targetPiece = targetSquare.firstChild ? targetSquare.firstChild.id : null;
       highlightedSquares.push({
         squareId: move,
         pieceId: targetPiece,
@@ -1140,13 +1019,8 @@ function highlightSpellPossibleMoves(pieceId, squareId) {
   if (passThroughSpellActive) {
     deactivateSpell();
     getPossibleMovesForAllPieces(squareId).forEach((move) => {
-      const targetSquare = document.querySelector(
-        `.square[square-id='${move}']`,
-      );
-      if (
-        targetSquare &&
-        !highlightedSquares.some((highlighted) => highlighted.squareId === move)
-      ) {
+      const targetSquare = document.querySelector(`.square[square-id='${move}']`);
+      if (targetSquare && !highlightedSquares.some((highlighted) => highlighted.squareId === move)) {
         highlightedSquares.push({
           squareId: move,
           pieceId: null,
@@ -1243,14 +1117,14 @@ function updateSoundButton() {
 }
 
 function updateShadowColor() {
-  const gameboard = document.querySelector('#gameboard');
-  
-  if (currentPlayer === 'blue') {
+  const gameboard = document.querySelector("#gameboard");
+
+  if (currentPlayer === "blue") {
     gameboard.style.boxShadow = `
       0 -5px 10px -3px transparent,
       0 5px 10px -3px blue         
     `;
-  } else if (currentPlayer === 'red') {
+  } else if (currentPlayer === "red") {
     gameboard.style.boxShadow = `
       0 -5px 10px -3px red,          
       0 5px 10px -3px transparent  
@@ -1260,10 +1134,10 @@ function updateShadowColor() {
 
 window.addEventListener("load", () => {
   localStorage.removeItem("moveHistory");
-	localStorage.removeItem("gameOverInfo");
-	initialBoardState = initializeBoard();
-	createBoard(initialBoardState);
-  updateShadowColor()
-	startTimer();
-	moveHistory = [];
-  });
+  localStorage.removeItem("gameOverInfo");
+  initialBoardState = initializeBoard();
+  createBoard(initialBoardState);
+  updateShadowColor();
+  startTimer();
+  moveHistory = [];
+});
